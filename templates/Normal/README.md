@@ -67,12 +67,25 @@ This library is available as [a NuGet package](https://www.nuget.org/packages/my
 
   `dotnet add package mypackage`
 
-## Contributors
-
-Your contributions are always welcome! Please have a look at the [contribution guidelines](CONTRIBUTING.md) first.
+## Building
 
 To build this repository locally, you need the following:
-* TODO
+* The [.NET SDKs](https://dotnet.microsoft.com/en-us/download/visual-studio-sdks) for .NET 4.7, 6.0 and 8.0.
+* Visual Studio, JetBrains Rider or Visual Studio Code with the C# DevKit
+
+You can also build, run the unit tests and package the code using the following command-line:
+
+`build.ps1`
+
+Or, if you have, the [Nuke tool installed](https://nuke.build/docs/getting-started/installation/):
+
+`nuke`
+
+Also try using `--help` to see all the available options or `--plan` to see what the scripts does.
+
+## Contributing
+
+Your contributions are always welcome! Please have a look at the [contribution guidelines](CONTRIBUTING.md) first.
 
 Previous contributors include:
 
@@ -88,13 +101,17 @@ This library uses [Semantic Versioning](https://semver.org/) to give meaning to 
 ## Credits
 This library wouldn't have been possible without the following tools, packages and companies:
 
-* [Nuke](https://nuke.build/) - Smart automation for DevOps teams and CI/CD pipelines
-* [xUnit](https://xunit.net/) - Community-focused unit testing tool for .NET.
-* [FluentAssertions](https://www.fluentassertions.com/) - Nice assertions
-* [Coverlet](https://github.com/coverlet-coverage/coverlet) - Cross platform code coverage for .NET
-* [Polysharp](https://github.com/Sergio0694/PolySharp) - Generated, source-only polyfills for C# language features
+* [Nuke](https://nuke.build/) - Smart automation for DevOps teams and CI/CD pipelines by [Matthias Koch](https://github.com/matkoch)
+* [xUnit](https://xunit.net/) - Community-focused unit testing tool for .NET by [Brad Wilson](https://github.com/bradwilson)
+* [Coverlet](https://github.com/coverlet-coverage/coverlet) - Cross platform code coverage for .NET by [Toni Solarin-Sodara](https://github.com/tonerdo)
+* [Polysharp](https://github.com/Sergio0694/PolySharp) - Generated, source-only polyfills for C# language features by [Sergio Pedri](https://github.com/Sergio0694)
 * [GitVersion](https://gitversion.net/) - From git log to SemVer in no time
-* [ReportGenerator](https://reportgenerator.io/) - Powerful code coverage visualization
+* [ReportGenerator](https://reportgenerator.io/) - Converts coverage reports by [Daniel Palme](https://github.com/danielpalme)
+* [StyleCopyAnalyzer](https://github.com/DotNetAnalyzers/StyleCopAnalyzers) - StyleCop rules for .NET
+* [Roslynator](https://github.com/dotnet/roslynator) - A set of code analysis tools for C# by [Josef Pihrt](https://github.com/josefpihrt)
+* [CSharpCodingGuidelines](https://github.com/bkoelman/CSharpGuidelinesAnalyzer) - Roslyn analyzers by [Bart Koelman](https://github.com/bkoelman) to go with the [C# Coding Guidelines](https://csharpcodingguidelines.com/)
+* [Meziantou](https://github.com/meziantou/Meziantou.Framework) - Another set of awesome Roslyn analyzers by [Gérald Barré](https://github.com/meziantou)
+* [Verify](https://github.com/VerifyTests/Verify) - Snapshot testing by [Simon Cropp](https://github.com/SimonCropp)
 
 ## Support the project
 * [Github Sponsors](https://github.com/sponsors/your-github-username)
