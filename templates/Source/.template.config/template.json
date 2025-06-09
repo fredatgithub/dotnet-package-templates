@@ -1,0 +1,22 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Dennis Doomen",
+    "classifications": [ "NuGet Package", "Class Library", "Solution Template" ],
+    "tags": {
+      "language": "C#"
+    },
+    "identity": "DennisDoomen.{{ source_only ? "SourceLibraryPackage" : "BinaryLibraryPackage" }}.Template",
+    "name": "Class Library NuGet{{ source_only ? " Source-Only " : " " }}Package Solution",
+    "description": "NuGet-published {{ source_only ? "source-only" : "binary" }} multi-targeting library with all the bells and whistles",
+    "shortName": "class-library-{{ source_only ? "source-only-" : "" }}package-solution",
+    "sourceName": "MyPackage",
+    "sources": [
+      {
+        "modifiers": [
+          {
+            "exclude": [ "src/.idea/**", ".template_config/**" ]
+          }
+        ]
+      }
+    ]
+  }
