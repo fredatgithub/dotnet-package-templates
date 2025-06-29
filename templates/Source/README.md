@@ -1,3 +1,4 @@
+{{ if !package_readme }}
 <h1 align="center">
   <br>
   MyPackage
@@ -12,6 +13,7 @@
 
 <div align="center">
 
+{{~ if !azdo ~}}
 [![](https://img.shields.io/github/actions/workflow/status/your-github-username/mypackage/build.yml?branch=main)](https://github.com/your-github-username/mypackage/actions?query=branch%3amain)
 [![Coveralls branch](https://img.shields.io/coverallsCoverage/github/your-github-username/mypackage?branch=main)](https://coveralls.io/github/your-github-username/mypackage?branch=main)
 [![](https://img.shields.io/github/release/your-github-username/mypackage.svg?label=latest%20release&color=007edf)](https://github.com/your-github-username/mypackage/releases/latest)
@@ -22,23 +24,26 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/your-github-username/mypackage)](https://github.com/your-github-username/mypackage)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/your-github-username/mypackage)](https://github.com/your-github-username/mypackage/graphs/commit-activity)
 [![open issues](https://img.shields.io/github/issues/your-github-username/mypackage)](https://github.com/your-github-username/mypackage/issues)
+{{~ end ~}}
+![Static Badge](https://img.shields.io/badge/4.7%2C_8.0%2C_netstandard2.0%2C_netstandard2.1-dummy?label=dotnet&color=%235027d5)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com)
 ![](https://img.shields.io/badge/release%20strategy-githubflow-orange.svg)
-![Static Badge](https://img.shields.io/badge/4.7%2C_6.0%2C_netstandard2.0%2C_netstandard2.1-dummy?label=dotnet&color=%235027d5)
-
-
 
 <a href="#about">About</a> •
 <a href="#how-to-use-it">How To Use</a> •
 <a href="#download">Download</a> •
-<a href="#contributors">Contributors</a> •
+<a href="#building">Building</a> •
+<a href="#contributing">Contributing</a> •
 <a href="#versioning">Versioning</a> •
 <a href="#credits">Credits</a> •
 <a href="#related">Related</a> •
+{{~ if open_source ~}}
 <a href="#license">License</a>
+{{~ end ~}}
 
 </div>
 
+{{ end ~}}
 ## About
 
 ### What's this?
@@ -58,7 +63,9 @@ Add stuff like:
 
 ### Who created this?
 * Something about you, your company, your team, etc.
+{{ if open_source }}
 * How to contact you like LinkedIn, Twitter, Bluesky, Mastodon, email, etc.
+{{ end ~}}
 
 ## How do I use it?
 * Code examples
@@ -69,15 +76,32 @@ Some example code showing your library
 ```
 
 ## Download
-
+{{ if open_source }}
 This library is available as [a NuGet package](https://www.nuget.org/packages/mypackage) on https://nuget.org. To install it, use the following command-line:
 
   `dotnet add package mypackage`
 
+{{~ else if azdo ~}}
+This library is available as [a NuGet package] on https://dev.azure.com/MyOrganization/MyPackage/_artifacts. To install it, use the following command-line:
+
+`dotnet add package Fnv.IntegrationPlatform.Crm`
+
+{{~ else ~}}
+This library can be installed by adding the GitHub Packages feed to your package manager:
+
+ {%{ `dotnet nuget add source --username USERNAME --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/NAMESPACE/index.json"` }%}
+
+Read more about [GitHub Packages](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-nuget-registry).
+
+Then, install the package using the following command-line:
+
+  `dotnet add package mypackage`
+{{ end ~}}
+
 ## Building
 
 To build this repository locally, you need the following:
-* The [.NET SDKs](https://dotnet.microsoft.com/en-us/download/visual-studio-sdks) for .NET 4.7, 6.0 and 8.0.
+* The [.NET SDKs](https://dotnet.microsoft.com/en-us/download/visual-studio-sdks) for .NET 4.7 and 8.0.
 * Visual Studio, JetBrains Rider or Visual Studio Code with the C# DevKit
 
 You can also build, run the unit tests and package the code using the following command-line:
@@ -90,10 +114,12 @@ Or, if you have, the [Nuke tool installed](https://nuke.build/docs/getting-start
 
 Also try using `--help` to see all the available options or `--plan` to see what the scripts does.
 
+{{~ if !package_readme ~}}
 ## Contributing
 
 Your contributions are always welcome! Please have a look at the [contribution guidelines](CONTRIBUTING.md) first.
 
+{{~ if open_source ~}}
 Previous contributors include:
 
 <a href="https://github.com/your-github-username/mypackage/graphs/contributors">
@@ -101,6 +127,8 @@ Previous contributors include:
 </a>
 
 (Made with [contrib.rocks](https://contrib.rocks))
+{{~ end ~}}
+{{~ end ~}}
 
 ## Versioning
 This library uses [Semantic Versioning](https://semver.org/) to give meaning to the version numbers. For the versions available, see the [tags](/releases) on this repository.
@@ -120,12 +148,14 @@ This library wouldn't have been possible without the following tools, packages a
 * [Meziantou](https://github.com/meziantou/Meziantou.Framework) - Another set of awesome Roslyn analyzers by [Gérald Barré](https://github.com/meziantou)
 * [Verify](https://github.com/VerifyTests/Verify) - Snapshot testing by [Simon Cropp](https://github.com/SimonCropp)
 
+{{~ if open_source ~}}
 ## Support the project
 * [Github Sponsors](https://github.com/sponsors/your-github-username)
 * [Tip Me](https://paypal.me/your-paypal-username)
 * [Buy me a Coffee](https://ko-fi.com/your-github-username)
 * [Patreon](https://patreon.com/your-patreon-username)
 
+{{~ if !package_readme ~}}
 ## You may also like
 
 * Your blog
@@ -134,3 +164,5 @@ This library wouldn't have been possible without the following tools, packages a
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+{{ end -}}
+{{ end -}}

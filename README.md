@@ -1,10 +1,12 @@
 <h1 align="center">
   <br>
-  .NET Library Package Templates
+  .NET Library Starter Kit
   <br>
 </h1>
 
-<h4 align="center">"dotnet new" templates for building NuGet-published multi-targeting binary or source-only libraries with all the bells and whistles</h4>
+<h4 align="center">
+A battle-tested starter kit for building open-source and internal NuGet libraries, born from half a billion downloads.
+</h4>
 
 <div align="center">
 
@@ -21,7 +23,7 @@
 <a href="#about">About</a> •
 <a href="#download">Download</a> •
 <a href="#how-to-use-it">How To Use</a> •
-<a href="#building">Contributors</a> •
+<a href="#building">Building</a> •
 <a href="#contributors">Contributors</a> •
 <a href="#versioning">Versioning</a> •
 <a href="#credits">Credits</a> •
@@ -34,22 +36,27 @@
 
 ### What's this?
 
-A bunch of `dotnet new` templates to quickly get you started building high-quality binary or source-only libraries including everything you need to publish it on NuGet or make it available as open-source.
+A bunch of `dotnet new` templates to quickly get you started building high-quality binary or source-only open-source and non-open-source libraries including everything you need to publish it on NuGet or make it available as open-source.
 
 It includes:
 * Multi-targeting to cover as many .NET frameworks as possible
+* Separate templates for internal (or "inner sourced") as well as open-source libraries
+* Support for both GitHub and Azure DevOps Repositories/Pipelines
 * Can create projects for binary or source-only packages
 * Code coverage using [Coverlet](https://github.com/coverlet-coverage/coverlet) and [Coveralls.io](https://coveralls.io/)
 * Static code analysis using Roslyn analyzers [StyleCopAnalyzers](https://github.com/DotNetAnalyzers/StyleCopAnalyzers), [Roslynator](https://github.com/dotnet/roslynator), [CSharpGuidelinesAnalyzer](https://github.com/bkoelman/CSharpGuidelinesAnalyzer) and [Meziantou](https://github.com/meziantou/Meziantou.Framework).
-* Auto-formatting using `.editorconfig` and settings honored by [JetBrains Rider](https://www.jetbrains.com/rider/) and [ReSharper](https://www.jetbrains.com/resharper/)
+* Auto-formatting using (a slightly opinionated) `.editorconfig` and settings honored by [JetBrains Rider](https://www.jetbrains.com/rider/) and [ReSharper](https://www.jetbrains.com/resharper/)
 * A [Nuke](https://nuke.build/) C# build script that you can run locally as well as in your CI/CD pipeline
 * A GitHub Actions workflow that builds, tests, packages and publishes your library
+* GitHub issue templates to streamline bug reporting and feature requests
 * An extensive read-me
 * Automatic versioning using [GitVersion](https://gitversion.net/) and tagging
 * Contribution guidelines
 * Customized release notes templates for GitHub connected to pull requests labels.
 * A test project using [xUnit](https://xunit.net/) and [Fluent Assertions 7](https://fluentassertions.com/)
 * Validation of the public API of the library against snapshots using [Verify](https://github.com/VerifyTests/Verify)
+* NuGet auditing using .NET built-in auditing capabilities
+* NuGet package and licensing scanning through [PackageGuard](https://github.com/dennisdoomen/packageguard?tab=readme-ov-file#readme)
 
 ### What's so special about that?
 
@@ -60,7 +67,7 @@ This is the result of years of experience in building in-house and open-source l
 **Tip** You can also use this as a starting point for a [GitHub Template Repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-template-repository), fork and adapt the repository for your own company, or use it as an organization template in Azure DevOps.
 
 ### Who created this?
-My name is Dennis Doomen and I'm a Microsoft MVP and Principal Consultant at [Aviva Solutions](https://avivasolutions.nl/) with 28 years of experience under my belt. As a software architect and/or lead developer, I specialize in designing full-stack enterprise solutions based on .NET as well as providing coaching on all aspects of designing, building, deploying and maintaining software systems. I'm the author of several open-source projects such as [Fluent Assertions](https://www.fluentassertions.com), [Reflectify](https://github.com/dennisdoomen/reflectify), [Liquid Projections](https://www.liquidprojections.net), and I've been maintaining [coding guidelines for C#](https://www.csharpcodingguidelines.com) since 2001.
+My name is Dennis Doomen and I'm a Microsoft MVP and Principal Consultant at [Aviva Solutions](https://avivasolutions.nl/) with 29 years of experience under my belt. As a coding architect, I specialize in designing full-stack enterprise solutions based on .NET as well as providing coaching on all aspects of designing, building, deploying and maintaining software systems. I'm the author of several open-source projects such as [Fluent Assertions](https://www.fluentassertions.com), [Reflectify](https://github.com/dennisdoomen/reflectify), [Liquid Projections](https://www.liquidprojections.net), and I've been maintaining [coding guidelines for C#](https://www.csharpcodingguidelines.com) since 2001.
 
 Contact me through [Email](mailto:dennis.doomen@avivasolutions.nl), [Bluesky](https://bsky.app/profile/dennisdoomen.com), [Twitter/X](https://twitter.com/ddoomen) or [Mastadon](https://mastodon.social/@ddoomen)
 
@@ -70,18 +77,34 @@ This repository is available as [a NuGet package](https://www.nuget.org/packages
 
 `dotnet new install DotNetLibraryPackageTemplates`
 
+You can update the templates using the following command.
+
+`dotnet new update`
+
 ## How do I use it?
 
 ### Generating the library skeleton
 
 1. Create a new directory for your library initialized with Git
-1. Run the following command
+1. Run the following command to start building an internal library for GitHub
 
-    `dotnet new class-library-package-solution --name TheNameOfYourAwesomeLibrary`
+    `dotnet new nooss-binary-nuget-class-library-sln --name TheNameOfYourAwesomeLibrary`
 
-   Or, if you prefer to build a NuGet package that only adds source files to a project (and avoids binary dependencies)
+    Or, if you prefer to build a NuGet package that only adds source files to a project (and avoids binary dependencies)
 
-   `dotnet new class-library-source-only-package-solution --name TheNameOfYourAwesomeLibrary`
+    `dotnet new nooss-source-only-nuget-class-library-sln --name TheNameOfYourAwesomeLibrary`
+
+    Or, if you want to build an open-source packages, use either of the following
+
+    `dotnet new oss-binary-nuget-class-library-sln --name TheNameOfYourAwesomeLibrary`
+
+    `dotnet new oss-source-only-nuget-class-library-sln --name TheNameOfYourAwesomeLibrary`
+
+    If you are still using Azure DevOps, we got you covered, but you need the organization and project names as well. Again, choose between a binary package or a source-only package.
+
+    `dotnet new azdo-binary-nuget-class-library-sln --name TheNameOfYourAwesomeLibrary --organization MyDevOpsOrganization --project MyDevOpsProject` 
+
+    `dotnet new azdo-source-only-nuget-class-library-sln --name TheNameOfYourAwesomeLibrary --organization MyDevOpsOrganization --project MyDevOpsProject`
 
 1. Make the necessary changes to the generated code (see next section)
 1. Commit the changes to your repository into a new commit. Without it, the build script will crash on generating the version number.
@@ -91,16 +114,27 @@ This repository is available as [a NuGet package](https://www.nuget.org/packages
 
 The template makes a lot of assumptions, so after generating the project, there's a couple of things you can tweak.
 
-* Update the `README.md` with information about your library
-* Review the guidelines in `CONTRIBUTION.md` to see if it aligns with how you want to handle contributions
+* Update the `Readme.md` and `PackageReadme.md` with information about your library
+* Review the guidelines in `CONTRIBUTING.md` to see if it aligns with how you want to handle contributions
+* Review the issue templates under `.github/issue_template`
 * Adjust the .NET frameworks this library should target
-* Adjust the namespace
+* Adjust the root namespace and assembly names
 * Set-up labels in GitHub matching those in the `release.yml` so you can label pull requests accordingly
 * Alter the coverage service that is being used.
 * Determine if you want to use API verification against snapshots
 * Study the Nuke `build.cs` file or invoking it through `build.ps1 -plan` to see how it works
 * See if all dependencies are up-to-date
+* Configure NuGet auditing (see next paragraph)
+* Check out the allowed open-source licenses and packages in the `PackageGuard.config.json`
 * Adjust the `funding.yml` to allow people to sponsor your project
+
+## Additional things to be aware of
+
+### About NuGet auditing
+By default, a `dotnet restore` will also check the NuGet packages [for any vulnerabilities](https://learn.microsoft.com/en-us/nuget/concepts/auditing-packages). If you run into those, there are a couple of options you can take.
+1. Update the dependencies to a version that resolve the vulnerability
+1. Update the `WarningsNotAsErrors` element in the `Directory.Build.Props` file to include the relevant `NU190x` error codes as listed [here](https://learn.microsoft.com/en-us/nuget/concepts/auditing-packages#warning-codes).
+1. Disable auditing entirely by setting the `NuGetAudit` element to `false` in that same `Directory.Build.Props` file.
 
 ### About API verification
 
@@ -164,6 +198,9 @@ This library wouldn't have been possible without the following tools, packages a
 
 * [My Blog](https://www.dennisdoomen.com)
 * [FluentAssertions](https://github.com/fluentassertions/fluentassertions) - Extension methods to fluently assert the outcome of .NET tests
+* [PackageGuard](https://github.com/dennisdoomen/packageguard?tab=readme-ov-file#readme) - Get a grip on your open-source packages
+* [Reflectify](https://github.com/dennisdoomen/reflectify?tab=readme-ov-file#readme) - Reflection extensions without causing dependency pains
+* [Pathy](https://github.com/dennisdoomen/pathy?tab=readme-ov-file#readme) - Fluently building and using file and directory paths without binary dependencies
 * [C# Coding Guidelines](https://csharpcodingguidelines.com/) - Forkable coding guidelines for all C# versions
 
 ## License
