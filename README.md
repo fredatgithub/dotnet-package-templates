@@ -88,7 +88,7 @@ You can update the templates using the following command.
 1. Create a new directory for your library initialized with Git
 1. Run the following command to start building an internal library for GitHub
 
-    `dotnet new nooss-binary-nuget-class-library-sln --name TheNameOfYourAwesomeLibrary`
+    `dotnet new nooss-nuget-class-library-sln --name TheNameOfYourAwesomeLibrary`
 
     Or, if you prefer to build a NuGet package that only adds source files to a project (and avoids binary dependencies)
 
@@ -96,13 +96,13 @@ You can update the templates using the following command.
 
     Or, if you want to build an open-source packages, use either of the following
 
-    `dotnet new oss-binary-nuget-class-library-sln --name TheNameOfYourAwesomeLibrary`
+    `dotnet new oss-nuget-class-library-sln --name TheNameOfYourAwesomeLibrary`
 
     `dotnet new oss-source-only-nuget-class-library-sln --name TheNameOfYourAwesomeLibrary`
 
     If you are still using Azure DevOps, we got you covered, but you need the organization and project names as well. Again, choose between a binary package or a source-only package.
 
-    `dotnet new azdo-binary-nuget-class-library-sln --name TheNameOfYourAwesomeLibrary --organization MyDevOpsOrganization --project MyDevOpsProject` 
+    `dotnet new azdo-nuget-class-library-sln --name TheNameOfYourAwesomeLibrary --organization MyDevOpsOrganization --project MyDevOpsProject` 
 
     `dotnet new azdo-source-only-nuget-class-library-sln --name TheNameOfYourAwesomeLibrary --organization MyDevOpsOrganization --project MyDevOpsProject`
 
@@ -112,22 +112,7 @@ You can update the templates using the following command.
 
 ### What to do after that
 
-The template makes a lot of assumptions, so after generating the project, there's a couple of things you can tweak.
-
-* Update the `Readme.md` and `PackageReadme.md` with information about your library
-* Review the guidelines in `CONTRIBUTING.md` to see if it aligns with how you want to handle contributions
-* Review the issue templates under `.github/issue_template`
-* Adjust the .NET frameworks this library should target
-* Adjust the root namespace and assembly names
-* Set-up labels in GitHub matching those in the `release.yml` so you can label pull requests accordingly
-* Alter the coverage service that is being used.
-* Determine if you want to use API verification against snapshots
-* Study the Nuke `build.cs` file or invoking it through `build.ps1 -plan` to see how it works
-* See if all dependencies are up-to-date
-* Configure NuGet auditing (see next paragraph)
-* Fine-tune the allowed open-source licenses and packages in the `.\packageguard\config.json`
-* Store the PackageGuard cache that appears under `.\packageguard` after a first build in source control to speed-up successive runs
-* Adjust the `funding.yml` to allow people to sponsor your project
+The generated solution contains a read-me that provides additional tips to get started. 
 
 ## Additional things to be aware of
 
@@ -139,8 +124,7 @@ By default, a `dotnet restore` will also check the NuGet packages [for any vulne
 
 ### About API verification
 
-The `ApiVerificationTests` will generate a `.txt` file containing a representation (per target framework) of the public API of your library. It's a nice technique to prevent accidentally introducing breaking changes. So, whenever the structure of your API changes compared to the snapshot stored in the `ApprovedApi` folder, the test will fail.
-You can then use `AcceptApiChanges.ps1` to update the snapshots and make the test succeed again.
+The `ApiVerificationTests` will generate a `.txt` file containing a representation (per target framework) of the public API of your library. It's a nice technique to prevent accidentally introducing breaking changes. So, whenever the structure of your API changes compared to the snapshot stored in the `ApprovedApi` folder, the test will fail. You can then use `AcceptApiChanges.ps1` to update the snapshots and make the test succeed again. Alternatively, you can install the plug-in [Verify Support](https://plugins.jetbrains.com/plugin/17240-verify-support) by Matthias Koch to do this from inside [JetBrains Rider](https://www.jetbrains.com/rider/) or [ReSharper](https://www.jetbrains.com/resharper/). 
 
 ## Building
 
